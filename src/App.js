@@ -83,22 +83,41 @@ const App = () => {
     }
   };
 
+  // const handleUpdate = (id, newNumber) => {
+  //   const personToUpdate = persons.find((person) => person.id === id);
+  //   const updatedPerson = { ...personToUpdate, number: newNumber };
+
+  //   personServer
+  //   .update(id, updatedPerson)
+  //   .then((response) => {
+  //     setPersons(
+  //       persons.map((person) => (person.id === id ? response.data : person))
+  //     );
+  //   })
+  //   .catch((error) => {
+  //     console.log(`Error updating person, ${error}`);
+  //   });
+    
+  // }
+
   const handleUpdate = (id, newNumber) => {
     const personToUpdate = persons.find((person) => person.id === id);
     const updatedPerson = { ...personToUpdate, number: newNumber };
-
+  
     personServer
-    .update(id, updatedPerson)
-    .then((response) => {
-      setPersons(
-        persons.map((person) => (person.id === id ? response.data : person))
-      );
-    })
-    .catch((error) => {
-      console.log(`Error updating person, ${error}`);
-    });
-    
-  }
+      .update(id, updatedPerson)
+      .then((response) => {
+        setPersons((prevPersons) =>
+          prevPersons.map((person) =>
+            person.id === id ? response.data : person
+          )
+        );
+      })
+      .catch((error) => {
+        console.log(`Error updating person, ${error}`);
+      });
+  };
+  
 
   const deletPerson = id => {
     personServer
