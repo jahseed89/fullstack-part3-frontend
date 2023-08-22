@@ -1,0 +1,30 @@
+.update-person-container {
+    display: flex;
+    flex-direction: column;
+
+    .updates-btn-holder {
+        display: flex;
+        flex-direction: column;
+
+        div:nth-child(1) {
+            margin: .5rem 0;
+        }
+        div:nth-child(2) {
+            display: flex;
+            gap: 1rem;
+
+            button {
+                border-radius: 5px;
+                border: none;
+                background-color: #000;
+                color: #fff;
+            }
+
+            button:first-child {
+                background-color: red;
+                color: #fff;
+                padding: .3rem .8rem;
+            }
+        }
+    }
+}
