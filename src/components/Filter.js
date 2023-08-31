@@ -1,14 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-const Filter = ({onChange}) => {
+const Filter = ({ onChange }) => {
   return (
     <div>
-        <p>
+      <p>
           Fliter shown with{" "}
-          <input type="text" name="search" onChange={onChange} />
-        </p>
-      </div>
-  )
-}
+        <input type="text" name="search" onChange={onChange} />
+      </p>
+    </div>
+  );
+};
 
-export default Filter
+export default Filter;

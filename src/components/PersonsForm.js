@@ -1,31 +1,32 @@
-import React from 'react'
+import React from 'react';
 
-const PersonsFrom = ({onSubmit, textValue, textOnchange, numValue, numOnchange }) => {
+const PersonsFrom = ({ onSubmit, textValue, textOnchange, numValue, numOnchange }) => {
   return (
     <form onSubmit={onSubmit}>
-        <h2>Add new</h2>
+      <h2>Add new</h2>
+      <div>
+          Name:{" "} <br />
+        <input
+          type="text"
+          value={textValue}
+          onChange={textOnchange}
+          name="name"
+        />
+        <br />
+          Numbers:{" "} <br />
+        <input
+          type="number"
+          value={numValue}
+          onChange={numOnchange}
+          name="number"
+        />
+        <br />
         <div>
-          Name:{" "}
-          <input
-            type="text"
-            value={textValue}
-            onChange={textOnchange}
-            name="name"
-          />
-          <br />
-          Numbers:{" "}
-          <input
-            type="number"
-            value={numValue}
-            onChange={numOnchange}
-            name="number"
-          />
-          <div>
-            <button type="submit">add</button>
-          </div>
+          <button type="submit">add</button>
         </div>
-      </form>
-  )
-}
+      </div>
+    </form>
+  );
+};
 
-export default PersonsFrom
+export default PersonsFrom;

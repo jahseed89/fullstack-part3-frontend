@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import "./persons.scss";
 
@@ -20,6 +21,7 @@ const Persons = ({ id, name, number, handleDelete, handleUpdate }) => {
       <div className="updates-btn-holder">
         <div>
           {name}
+          {" "}
           <span>
             {isEditing ? (
               <input

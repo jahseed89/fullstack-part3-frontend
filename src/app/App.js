@@ -6,7 +6,7 @@ import Filter from "../components/Filter";
 import PersonsFrom from "../components/PersonsForm";
 import Persons from "../components/persons/Persons";
 import InvalidNotification from "../components/InvalidNotification";
-import './app.scss'
+import './app.scss';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -61,11 +61,12 @@ const App = () => {
     const incompleteName = values.name.length <= 4;
 
     // Validation for incomplete number
-    const incompletNumber = values.number.length <= 9;
+    const incompletNumber = values.number.length <= 7;
 
     if (warningMsg) {
       // window.alert("Sorry this information already exist pls try another");
       setInvalidInfo("Sorry this information already exist pls try another");
+      setValues({ name: "", number: "" });
       setTimeout(() => {
         setInvalidInfo(null);
       }, 5000);
@@ -76,12 +77,14 @@ const App = () => {
         setInvalidInfo(null);
       }, 5000);
     } else if (incompleteName) {
-      setInvalidInfo("Name must at least be at least 5 characters");
+      setInvalidInfo("Name must not be shorter than 5 characters");
+      setValues({ name: "", number: "" });
       setTimeout(() => {
         setInvalidInfo(null);
       }, 5000);
     } else if (incompletNumber) {
-      setInvalidInfo("Number must be at least ten digits");
+      setInvalidInfo("Number must be at least 8 digits");
+      setValues({ name: "", number: "" });
       setTimeout(() => {
         setInvalidInfo(null);
       }, 5000);
@@ -95,7 +98,7 @@ const App = () => {
       personServer
         .create(personObj)
         .then((response) => {
-          setPersons(persons.concat(response.data));
+          setPersons([response.data, ...persons]);
           setValues({ name: "", number: "" });
           setNotification(`${personObj.name} has been added sussessfully`);
 
@@ -143,23 +146,23 @@ const App = () => {
     <>
       <h1 className="content-title">Phonebook Application</h1>
       <div className="app-container">
-      <div>
-        <h2>Phonebook</h2>
-        <Notifier notifier={notification} />
-        <InvalidNotification invalidInfo={invalidInfo} />
-        <Filter onChange={handleChange} />
-        <PersonsFrom
-          onSubmit={handleSubmit}
-          textValue={values.name}
-          textOnchange={handleNameAndNum}
-          numValue={values.number}
-          numOnchange={handleNameAndNum}
-        />
-      </div>
-      <div>
-        <h2>Persons Information</h2>
-        {filteredNames.length > 0
-          ? filteredNames.map((person) => (
+        <div>
+          <h2>Phonebook</h2>
+          <Notifier notifier={notification} />
+          <InvalidNotification invalidInfo={invalidInfo} />
+          <Filter onChange={handleChange} />
+          <PersonsFrom
+            onSubmit={handleSubmit}
+            textValue={values.name}
+            textOnchange={handleNameAndNum}
+            numValue={values.number}
+            numOnchange={handleNameAndNum}
+          />
+        </div>
+        <div>
+          <h2>Persons Information</h2>
+          {filteredNames.length > 0
+            ? filteredNames.map((person) => (
               <div key={person.id}>
                 <Persons
                   id={person.id}
@@ -170,7 +173,7 @@ const App = () => {
                 />
               </div>
             ))
-          : persons.map((person) => (
+            : persons.map((person) => (
               <div key={person.id}>
                 <Persons
                   id={person.id}
@@ -181,8 +184,8 @@ const App = () => {
                 />
               </div>
             ))}
+        </div>
       </div>
-    </div>
     </>
   );
 };
